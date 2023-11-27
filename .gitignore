@@ -22,3 +22,16 @@ docs/site/
 # committed for packages, but should be committed for applications that require a static
 # environment.
 Manifest.toml
+
+
+# User defined
+database/
+output/
+scripts/
+input/simulations/
+*.db
+*.sql
+*.mat
+*.sqlite
+*.xlsx
+*.glade~

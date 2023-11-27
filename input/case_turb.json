@@ -1,0 +1,131 @@
+{
+    "Actions": {
+        "database": {
+            "load": true,
+            "reset": false
+        },
+        "verifications": {
+            "ULS": true,
+            "ALS": false
+        },
+        "dashboard": {
+            "link density": true,
+            "show current time": true
+        },
+        "run scripts": {
+            "beginning": false,
+            "before analysis": false,
+            "after analysis": false,
+            "end": false
+        }
+    },
+    
+    "Dashboard": {
+        "show current time": true,
+        "link density": true
+    },
+    
+    "Code": {
+        "option": "DNV",
+        "consequence class": 2
+    },
+    
+    "Directory": {
+        "input file": "./input",
+        "input data": "./input/simulations/TurbEval",
+        "output": "./output"
+    },
+    
+    "Database": {
+        "name": "case_turbEval.db",
+        "type": "MAT",
+        "input options": { "nested keys": [ "Results" ] },
+        "limit states": {
+            "ULS": {
+            "use specific folder": {
+                "limit state": false,
+                "load cases": false
+            },
+            "join string": "_",
+            "load cases": ["Const", "Turb"],
+            "simulations": {
+                "prefix": "Sim",
+                "suffix": { "from": 1, "to": 5 }
+            },
+            "use default columns": true
+            }
+        },        
+        "default columns": {
+            "lines": { 
+                "fairleads": { "from": 41, "to": 46 } 
+            },
+            "platforms": {
+                "dofs": [10, 11, 12, 13, 14, 15]
+            }
+        }
+    },
+    
+    "Monitors": {
+        "ULS": {
+            "lines": {
+                "ids": { "from": 1, "to": 6 },
+                "elements": {
+                    "fairleads": true,
+                    "anchors": false
+                }
+            },
+            "platforms": {
+                "ids": 1,
+                "dofs": "all"
+            }
+        }
+    },
+    
+    
+    "Ramp": {
+        "ULS": 3600.0
+    },
+    
+    
+    "Resistance": {
+        "fairleads": { "MBS": 1.1856e7 }
+    },
+    
+    "Movement Limitation": {
+        "platforms": {
+            "ids": [1],
+            "reference": [ 0, 0, 0, 0, 0, 0 ],
+            "max offset": 100,
+            "max translations": [100, 100, 20],
+            "max rotations": [360, 360, 360],
+            "is degree": true
+        }
+    },
+    
+    "Scripts": [
+        {
+            "name": "Julia 1",
+            "when": "beginning",
+            "type": "Julia Inline",
+            "definition": "println(\"Hello from Julia inline code!\")"
+        },
+        {
+            "name": "Python 1",
+            "when": "before analysis",
+            "type": "Python file",
+            "definition": "scripts/before_analysis.py"
+        },
+        {
+            "name": "Python 2",
+            "when": "after analysis",
+            "type": "Python inline",
+            "definition": "print('Python from terminal after analysis is complete!')"
+        },
+        {
+            "name": "Julia 2",
+            "when": "end",
+            "type": "Julia file",
+            "definition": "../scripts/TensionSummary.jl"
+        }
+    ]
+}
