@@ -41,7 +41,8 @@ function run_program(;
     GeneralOptions.execute_actions()
 
     tf = now()
-    msg = "Execution has finished at $(Dates.format(tf, "yyyy-mm-dd HH:MM:SS"))\nTotal elapsed time: $(canonicalize(tf-t0))"
+    msg = "Execution has finished \nTotal elapsed time: $(canonicalize(tf-t0))"
+    # msg = "Execution has finished at $(Dates.format(tf, "yyyy-mm-dd HH:MM:SS"))\nTotal elapsed time: $(canonicalize(tf-t0))"
     LogOptions.add_message(msg, new_status = LogOptions.task_info)
 
     return
@@ -78,3 +79,5 @@ function main(;
 end
 
 end # Module MyMooring
+
+

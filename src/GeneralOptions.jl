@@ -201,7 +201,8 @@ function execute_actions()
         )
         Database.load_data(simulation_names, file_reading_opt, default_cols, file_reading_settings)
         LogOptions.add_message(
-            "Elapsed time to load/create database: $(canonicalize(t0-now()))",
+            ######### DESCOMENTAR
+            # "Elapsed time to load/create database: $(canonicalize(t0-now()))",
             new_status = LogOptions.task_done,
         )
     else
